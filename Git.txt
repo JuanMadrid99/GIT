@@ -1,0 +1,102 @@
+***AREAS DE GIT***
+--Directorio de Trabajo //Carpeta del proyecto con el .git
+--Area de Preparacion //Permite retractarnos de los commit, cambios que seran incluidos en el proximo commit
+--Repositorio (directorio.git) //Contiene los metadatos y las versiones de el proyecto, se copia cuando clonamos el repositorio
+
+***GENERALES***
+pwd //Visualizar ruta de nuestra ubicacion
+ls //Listar elementos en el directorio
+ll //Listar elementos en el directorio con sus datos importantes
+cd "repo-git" //Entrar al directorio
+cd .. //Retrocedemos un directorio
+clear //Limpia la pantalla de comandos
+date //Saber la fecha
+df //Saber espacio en disco
+
+mkdir repo-git //Crear directorio
+mkdir -p {a,b}/{uno,dos,tres}/{blanco,negro} //Crear arbol de directorios
+rmdir repo-git //Eliminar directorio
+mv directorio contenedor //Meter un directorio en otro 
+mv directorio1 directorio2 //Cambiarle el nombre al directorio
+
+nano archivo1 //Crear o editar un archivo
+cat archivo1 //Ver contenido archivo
+cp archivo1.txt archivo2.txt //Copia y pega el contenido de un archivo a otro
+cp *.txt directorio //Copia todos los .txt al directorio especificado
+rm archivo //Elimina un archivo
+
+***INICIO***
+git init //Inicia git en un repositorio, crea el directorio .git
+git status //Verificar el estado del repositorio
+git add . //Agregar todos los archivos al stage, --lo enviamos al area de preparacion
+git rm --cached archivo.txt //Remueve los archivos de los stage, no se rastrean los cambios vuelve al --area de preparacion
+echo "documento" >> .gitignore //Agregar el archivo al .gitignore para no ser tomado en cuenta en el git add
+
+git commit -m "Subiendo archivos" //"Comprometerse" en la subida 
+git restore --staged archivo //Remueve el archivo del commit manteniendo su rastreo. 
+git commit --amend //Actualizar commit que ya existe
+git reset --soft HEAD~1 //Reiniciar el historial de los commits de una forma suave (no se modificara los archivos en el directorio de trabajo)
+git log //Mostrara el historial de commits --online para verlo mas pequeño, 
+git log -p //puedes ver el commit y la diferencia que trajo
+
+git remote //Nombre que se le asigno al repositorio remoto
+git remote -v //Verificar que hay un repositorio remoto
+
+***REPOSITORIO REMOTO***
+git clone url.git //Clonar un repositorio para tener una copia local
+
+"origin: Este es el nombre del repositorio remoto desde el cual quieres obtener los cambios."
+git push origin main//Enviar los cambios de un repositorio local a uno remoto
+git pull origin main//Descargar el contenido de un repositorio remoto y Actualizarel local 
+git fetch origin//Verificar los Cambios realizados en el repositorio remoto sin combinar esos cambios con el local, Permite saber si se han realizados cambios en repositorio remoto desde la ultima actualizacion
+git checkout origin/main //Visualizarlos antes de combinarlos 
+
+***REPOSITORIO LOCAL***
+git init //Iniciar git
+git add archivo1 //Agrega al archivo y rastrea
+git status //Verificar
+git commit -m "Subiendo" //Commit inicial, todavia no es parte de github, debemos crear un repositorio github
+git remote add origin url.git //Agregamos el remoto
+git remote -v //Aparece el repositorio remoto
+git push origin main //Enviamos todo desde la rama main
+
+***BRANCHS***
+git branch version-javascript //Se creo una rama nueva llamada version-javascript
+git branch //Ver las ramas
+git branch -a //Ver las ramas remotas
+git checkout version-javascript //Cambiar de rama
+git checkout -b version-python //Crear y cambiar de rama
+git branch -m version-js //Cambiar de nombre a una rama en la rama actual
+git git branch -m version-python version-py //Cambiarle el nombre a una rama aunque no este en ella
+git branch -d version-py //Eliminar una rama local 
+git merge version-js //Funciona la rama definida con la rama en la que nos encontramos
+git merge --continue //Despues de solucionar los conflictos durante el merge
+git checkout origin version-js //Mandamos la rama nueva al repositorio remoto
+
+--Obtener una rama nueva del remoto
+git fetch origin, git checkout rama-nueva
+
+--Eliminar rama en remoto y local
+git branch -d version-js --local 
+git push origin -d version-js --remoto
+
+
+***Bifurcar un Repositorio (fork)***
+--Crear una copia del repositorio remoto en tu cuenta de github, debemos buscar el repositorio
+--pull request //Solicitud de combinar tus cambios con el repositorio original
+
+
+***ISSUES***
+--Permite registrar tareas o asuntos que podemos abordar en un futuro como lista de tareas pendientes
+
+***CONFIGURACIONES***
+git config --global user.name "nombre" //Configura el nombre de forma global (todos los repositorios)
+git config user.name "nombre" //Configura el nombre de forma individual
+git config user.name //Verificar el nombre
+
+git config --global user.email "correo" //Configura el correo de forma global -Se recomienda no usar el correo personal, github da un correo adicional
+git config user.email "correo" //Configura el correo -Se recomienda no usar el correo personal, github da un correo adicional
+git config user.email //Verificar el correo
+
+git config --global init.defaultBranch main //Configura main como la rama principal
+git config --global core.editor "code --wait" //Espera a que termines de escribir el commit antes de continuar el proceso (para vscode) 
